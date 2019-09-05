@@ -1,0 +1,42 @@
+{
+  "name": "todoist-clone-app",
+  "version": "1.0.0",
+  "description": "Todoist Clone App",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/app.js"
+  },
+  "keywords": [
+    "todoist",
+    "clone",
+    "nodejs",
+    "graphql",
+    "reactjs"
+  ],
+  "author": "Abhilash Pujari",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.9.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "graphql": "^14.5.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-node": "^4.0.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^9.2.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  }
+}
