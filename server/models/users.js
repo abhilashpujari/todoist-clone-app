@@ -1,6 +1,6 @@
 "use strict";
 export default (sequelize, DataTypes) => {
-  const User = sequelize.define(
+  const Users = sequelize.define(
     "Users",
     {
       firstName: DataTypes.STRING,
@@ -10,8 +10,8 @@ export default (sequelize, DataTypes) => {
     },
     {}
   );
-  User.associate = function(models) {
-    User.hasMany(models.Projects);
+  Users.associate = function(models) {
+    Users.hasMany(models.Projects);
   };
-  return User;
+  return Users;
 };

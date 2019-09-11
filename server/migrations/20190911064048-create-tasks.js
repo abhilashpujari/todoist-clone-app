@@ -1,23 +1,20 @@
 'use strict';
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('Users', {
+  return queryInterface.createTable('Tasks', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    firstName: {
+    description: {
       type: Sequelize.STRING
     },
-    lastName: {
-      type: Sequelize.STRING
+    projectId: {
+      type: Sequelize.INTEGER
     },
-    email: {
-      type: Sequelize.STRING
-    },
-    password: {
-      type: Sequelize.STRING
+    dueDate: {
+      type: Sequelize.DATE
     },
     createdAt: {
       allowNull: false,
@@ -30,5 +27,5 @@ export function up(queryInterface, Sequelize) {
   });
 }
 export function down(queryInterface, Sequelize) {
-  return queryInterface.dropTable('Users');
+  return queryInterface.dropTable('Tasks');
 }

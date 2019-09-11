@@ -1,17 +1,20 @@
 'use strict';
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('Tasks', {
+  return queryInterface.createTable('Projects', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    content: {
+    name: {
       type: Sequelize.STRING
     },
-    dueDate: {
-      type: Sequelize.DATE
+    type: {
+      type: Sequelize.STRING
+    },
+    owner: {
+      type: Sequelize.INTEGER
     },
     createdAt: {
       allowNull: false,
@@ -24,5 +27,5 @@ export function up(queryInterface, Sequelize) {
   });
 }
 export function down(queryInterface, Sequelize) {
-  return queryInterface.dropTable('Tasks');
+  return queryInterface.dropTable('Projects');
 }

@@ -1,16 +1,22 @@
 "use strict";
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable("Projects", {
+  return queryInterface.createTable("Users", {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    identifier: {
+    firstName: {
       type: Sequelize.STRING
     },
-    name: {
+    lastName: {
+      type: Sequelize.STRING
+    },
+    email: {
+      type: Sequelize.STRING
+    },
+    password: {
       type: Sequelize.STRING
     },
     createdAt: {
@@ -24,5 +30,5 @@ export function up(queryInterface, Sequelize) {
   });
 }
 export function down(queryInterface, Sequelize) {
-  return queryInterface.dropTable("Projects");
+  return queryInterface.dropTable("Users");
 }

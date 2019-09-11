@@ -1,16 +1,16 @@
 "use strict";
 export default (sequelize, DataTypes) => {
-  const Task = sequelize.define(
+  const Tasks = sequelize.define(
     "Tasks",
     {
-      content: DataTypes.STRING,
-      dueDate: DataTypes.DATE,
-      projectId: DataTypes.INTEGER
+      description: DataTypes.STRING,
+      projectId: DataTypes.INTEGER,
+      dueDate: DataTypes.DATE
     },
     {}
   );
-  Task.associate = function(models) {
-    Task.belongsTo(models.Projects);
+  Tasks.associate = function(models) {
+    Tasks.belongsTo(models.Projects);
   };
-  return Task;
+  return Tasks;
 };
