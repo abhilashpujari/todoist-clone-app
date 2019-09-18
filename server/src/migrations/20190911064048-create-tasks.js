@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('Tasks', {
+  return queryInterface.createTable("Tasks", {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -11,7 +11,13 @@ export function up(queryInterface, Sequelize) {
       type: Sequelize.STRING
     },
     projectId: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      references: {
+        model: "Projects",
+        key: "id"
+      },
+      onUpdate: "CASCADE",
+      onDelete: "SET NULL"
     },
     dueDate: {
       type: Sequelize.DATE
@@ -27,5 +33,5 @@ export function up(queryInterface, Sequelize) {
   });
 }
 export function down(queryInterface, Sequelize) {
-  return queryInterface.dropTable('Tasks');
+  return queryInterface.dropTable("Tasks");
 }

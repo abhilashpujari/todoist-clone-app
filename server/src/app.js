@@ -2,7 +2,9 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import { fileLoader, mergeTypes, mergeResolvers } from "merge-graphql-schemas";
 import dotenv from "dotenv";
+import path from "path";
 import models from "./models";
+
 dotenv.config();
 
 const app = express();
@@ -18,15 +20,20 @@ const resolvers = mergeResolvers(
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: { models }
 });
 
 server.applyMiddleware({ app });
 
-models.sequelize.sync({}).then(() => {
-  app.listen({ port: PORT }, () =>
-    console.log(
-      `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-    )
-  );
-});
+models.sequelize
+  .sync({
+    force: false
+  })
+  .then(() => {
+    app.listen({ port: PORT }, () =>
+      console.log(
+        `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+      )
+    );
+  });

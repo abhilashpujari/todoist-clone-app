@@ -1,7 +1,15 @@
 export default {
   Query: {
-    getProject: (parent, { id }, { models }) =>
+    project: (parent, { id }, { models }) =>
       models.Projects.findOne({ where: { id } }),
-    allProjects: (parent, args, { models }) => models.Projects.findAll()
+    projects: (parent, args, { models }) => models.Projects.findAll()
+  },
+  Mutation: {
+    createProject: (parent, args, { models }) => {
+      return true;
+    },
+    updateProject: async (parent, args, { models }) => {
+      return true;
+    }
   }
 };

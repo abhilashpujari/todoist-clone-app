@@ -7,8 +7,8 @@ export default `
   }
 
   type Query {
-    getProject(id: Int!): Project!
-    allProjects: [Project!]!
+    project(id: Int!): Project!
+    projects: [Project!]!
   }
 
   type Mutation {

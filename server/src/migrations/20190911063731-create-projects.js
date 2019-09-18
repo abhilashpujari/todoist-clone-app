@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('Projects', {
+  return queryInterface.createTable("Projects", {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -13,8 +13,14 @@ export function up(queryInterface, Sequelize) {
     type: {
       type: Sequelize.STRING
     },
-    owner: {
-      type: Sequelize.INTEGER
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
     },
     createdAt: {
       allowNull: false,
@@ -27,5 +33,5 @@ export function up(queryInterface, Sequelize) {
   });
 }
 export function down(queryInterface, Sequelize) {
-  return queryInterface.dropTable('Projects');
+  return queryInterface.dropTable("Projects");
 }

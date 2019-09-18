@@ -4,7 +4,6 @@ export default (sequelize, DataTypes) => {
     "Tasks",
     {
       description: DataTypes.STRING,
-      projectId: DataTypes.INTEGER,
       dueDate: DataTypes.DATE
     },
     {}

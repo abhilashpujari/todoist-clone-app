@@ -4,8 +4,7 @@ export default (sequelize, DataTypes) => {
     "Projects",
     {
       name: DataTypes.STRING,
-      type: DataTypes.STRING,
-      owner: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     {}
   );
