@@ -10,17 +10,7 @@ export default (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING
     },
-    {
-      instanceMethods: {
-        comparePassword: function(password) {
-          if (bcrypt.compareSync(password, this.password)) {
-            return this;
-          } else {
-            return false;
-          }
-        }
-      }
-    }
+    {}
   );
 
   async function encryptPasswordIfChanged(user, options) {
@@ -31,6 +21,10 @@ export default (sequelize, DataTypes) => {
 
   Users.beforeCreate(encryptPasswordIfChanged);
   Users.beforeUpdate(encryptPasswordIfChanged);
+
+  Users.prototype.comparePassword = async function(password) {
+    return await bcrypt.compare(password, this.password);
+  };
 
   Users.associate = function(models) {
     Users.hasMany(models.Projects);
