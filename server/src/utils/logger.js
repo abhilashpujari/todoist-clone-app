@@ -13,7 +13,9 @@ var transport = new transports.DailyRotateFile({
 const loggerLib = createLogger({
   format: combine(
     timestamp(),
-    printf(info => `[${info.timestamp}] [${info.level}] ${info.message}`)
+    printf(({ level, message, timestamp }) => {
+      return `[${timestamp}] [${level}] ${message}`;
+    })
   ),
   transports: [transport]
 });
