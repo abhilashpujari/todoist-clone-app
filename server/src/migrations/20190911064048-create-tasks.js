@@ -22,6 +22,15 @@ export function up(queryInterface, Sequelize) {
     dueDate: {
       type: Sequelize.DATE
     },
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: "Users",
+        key: "id"
+      },
+      onUpdate: "CASCADE",
+      onDelete: "SET NULL"
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE

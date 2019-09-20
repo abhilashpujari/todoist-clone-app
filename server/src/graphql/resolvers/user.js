@@ -1,6 +1,8 @@
 export default {
   Mutation: {
-    login: async (parent, { email, password }, { models }) => {
+    login: async (parent, { input }, { models }) => {
+      const { email, password } = input;
+      const { Users } = models;
       const user = await models.Users.findOne({ where: { email } });
 
       if (!user) {
@@ -14,14 +16,16 @@ export default {
         throw new Error("Email or password is incorrect");
       }
     },
-    register: async (parent, { email, password }, { models }) => {
-      const user = await models.Users.findOne({ where: { email } });
+    register: async (parent, { input }, { models }) => {
+      const { email, password } = input;
+      const { Users } = models;
+      const user = await Users.findOne({ where: { email } });
 
       if (user) {
         throw new Error("User already exists");
       }
 
-      const newUser = await models.Users.create({
+      const newUser = await Users.create({
         email,
         password
       });

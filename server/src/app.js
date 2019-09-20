@@ -4,6 +4,7 @@ import { fileLoader, mergeTypes, mergeResolvers } from "merge-graphql-schemas";
 import dotenv from "dotenv";
 import path from "path";
 import models from "./models";
+import logger from "./utils/logger";
 
 dotenv.config();
 
@@ -18,22 +19,22 @@ const resolvers = mergeResolvers(
   fileLoader(path.join(__dirname, "./graphql/resolvers"))
 );
 
-const server = new ApolloServer({
+const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: { models }
 });
 
-server.applyMiddleware({ app });
+apolloServer.applyMiddleware({ app });
 
 models.sequelize
   .sync({
     force: false
   })
   .then(() => {
-    app.listen({ port: PORT }, () =>
+    app.listen({ port: PORT }, () => {
       console.log(
-        `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-      )
-    );
+        `🚀 Server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`
+      );
+    });
   });

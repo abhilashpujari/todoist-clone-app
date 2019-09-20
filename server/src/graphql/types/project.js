@@ -1,5 +1,18 @@
 export default `
 
+  input getProjectInput {
+    id: Int!
+  }
+
+  input createProjectInput {
+    name: String!
+    type: String!
+  }
+
+  input updateProjectInput {
+    name: String
+  }
+
   type Project {
     id: Int!
     name: String!
@@ -7,12 +20,12 @@ export default `
   }
 
   type Query {
-    project(id: Int!): Project!
-    projects: [Project!]!
+    getProject(input: getProjectInput): Project!
+    getProjects: [Project!]!
   }
 
   type Mutation {
-    createProject(name: String!, type: String!): Boolean!
-    updateProject(name: String!): Boolean!
+    createProject(input: createProjectInput): Project!
+    updateProject(input: updateProjectInput): Project!
   }
 `;
