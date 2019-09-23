@@ -10,17 +10,15 @@ export function up(queryInterface, Sequelize) {
     name: {
       type: Sequelize.STRING
     },
-    type: {
-      type: Sequelize.STRING
-    },
     userId: {
       type: Sequelize.INTEGER,
+      fieldName: "userId",
       references: {
-        model: 'Users',
-        key: 'id',
+        model: "Users",
+        key: "id"
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
+      onUpdate: "CASCADE",
+      onDelete: "SET NULL"
     },
     createdAt: {
       allowNull: false,

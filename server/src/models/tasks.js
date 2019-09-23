@@ -9,8 +9,15 @@ export default (sequelize, DataTypes) => {
     {}
   );
   Tasks.associate = function(models) {
-    Tasks.belongsTo(models.Projects);
-    Tasks.belongsTo(models.Users);
+    Tasks.belongsTo(models.Projects, {
+      as: "projects",
+      foreignKey: "projectId"
+    });
+
+    Tasks.belongsTo(models.Users, {
+      as: "users",
+      foreignKey: "userId"
+    });
   };
   return Tasks;
 };

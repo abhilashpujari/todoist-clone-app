@@ -3,14 +3,16 @@ export default (sequelize, DataTypes) => {
   const Projects = sequelize.define(
     "Projects",
     {
-      name: DataTypes.STRING,
-      type: DataTypes.STRING
+      name: DataTypes.STRING
     },
     {}
   );
   Projects.associate = function(models) {
-    Projects.belongsTo(models.Users);
-    Projects.hasMany(models.Tasks);
+    Projects.belongsTo(models.Users, { as: "users", foreignKey: "userId" });
+    Projects.hasMany(models.Tasks, {
+      as: "tasks",
+      foreignKey: "projectId"
+    });
   };
   return Projects;
 };

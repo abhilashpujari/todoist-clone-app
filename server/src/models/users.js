@@ -27,7 +27,10 @@ export default (sequelize, DataTypes) => {
   };
 
   Users.associate = function(models) {
-    Users.hasMany(models.Projects);
+    Users.hasMany(models.Projects, {
+      as: "projects",
+      foreignKey: "userId"
+    });
   };
   return Users;
 };

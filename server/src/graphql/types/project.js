@@ -6,7 +6,6 @@ export default `
 
   input createProjectInput {
     name: String!
-    type: String!
   }
 
   input updateProjectInput {

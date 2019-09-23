@@ -1,14 +1,68 @@
+import projects from "../../models/projects";
+
 export default {
   Query: {
-    getTask: async (parent, { id }, { models }) =>
-      models.Tasks.findOne({ where: { id } }),
-    getTasks: async (parent, args, { models }) => models.Tasks.findAll()
+    getTask: async (parent, { id }, { models }) => {
+      let userId = 1;
+      let task = models.Tasks.findOne({ where: { id } });
+
+      if (!task) {
+        throw Error("Task doesn't exists");
+      }
+
+      if (task.userId !== userId) {
+        throw Error("You don't access to this resource");
+      }
+
+      return task;
+    },
+    getTasks: async (parent, args, { models }) =>
+      models.Tasks.findAll({
+        where: {
+          userId
+        }
+      })
   },
   Mutation: {
     createTask: async (parent, args, { models }) => {
-      return true;
+      const { Tasks, Projects } = models;
+      let { description, projectId } = input;
+      let userId = 1;
+
+      try {
+        let project = await Projects.findOne({ where: { id: projectId } });
+
+        if (!project) {
+          throw Error("Project doesn't exists");
+        }
+
+        if (project.userId !== userId) {
+          throw Error("You don't access to this resource");
+        }
+
+        task = await Tasks.create({ description, userId, projectId });
+
+        return task;
+      } catch (error) {
+        throw Error(error);
+      }
     },
-    updateTask: async (parent, args, { models }) => {
+    updateTask: async (parent, { input }, { models }) => {
+      const { Tasks, Projects } = models;
+      let { id } = input;
+
+      let task = await Tasks.findOne({ where: { id } });
+
+      if (!task) {
+        throw Error("Task doesn't exists");
+      }
+
+      if (task.userId !== userId) {
+        throw Error("You don't access to this resource");
+      }
+
+      await task.update({ input });
+
       return true;
     }
   }

@@ -12,6 +12,7 @@ export function up(queryInterface, Sequelize) {
     },
     projectId: {
       type: Sequelize.INTEGER,
+      fieldName: "projectId",
       references: {
         model: "Projects",
         key: "id"
@@ -24,6 +25,7 @@ export function up(queryInterface, Sequelize) {
     },
     userId: {
       type: Sequelize.INTEGER,
+      fieldName: "userId",
       references: {
         model: "Users",
         key: "id"
