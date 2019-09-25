@@ -1,25 +1,34 @@
 export default {
   Query: {
-    getProject: async (parent, { id }, { models }) => {
+    getProject: async (parent, { input }, { models }) => {
       let userId = 1;
-      let project = models.Projects.findOne({ where: { id } });
+      let { id } = input;
+      let { Projects } = models;
 
-      if (!project) {
-        throw Error("Project doesn't exists");
+      try {
+        let project = await Projects.findOne({ where: { id } });
+
+        if (!project) {
+          throw Error("Project doesn't exists");
+        }
+
+        if (project.userId !== userId) {
+          throw Error("You don't access to this resource");
+        }
+
+        return project;
+      } catch (error) {
+        throw new Error(error);
       }
-
-      if (taprojectsk.userId !== userId) {
-        throw Error("You don't access to this resource");
-      }
-
-      return project;
     },
-    getProjects: async (parent, args, { models }) =>
-      models.Projects.findAll({
+    getProjects: async (parent, args, { models }) => {
+      let userId = 1;
+      return await models.Projects.findAll({
         where: {
           userId
         }
-      })
+      });
+    }
   },
   Mutation: {
     createProject: async (parent, { input }, { models }) => {

@@ -5,14 +5,13 @@ export default `
   }
 
   input createTaskInput {
-    name: String!
     projectId: Int!
     dueDate: String!
     description: String!
   }
 
   input updateTaskInput {
-    name: String
+    id: Int!
     dueDate: String
     description: String
   }
@@ -24,8 +23,8 @@ export default `
   }
 
   type Query {
-    getTask(input: getTaskInput): Task!
-    getTasks: [Task!]!
+    getTask(input: getTaskInput): Task
+    getTasks: [Task!]
   }
 
   type Mutation {

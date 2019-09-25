@@ -19,6 +19,6 @@ export default `
 
   type Mutation {
     register(input: registerInput): User!
-    login(input: loginInput): User!
+    login(input: loginInput): User
   }
 `;

@@ -1,30 +1,37 @@
-import projects from "../../models/projects";
-
 export default {
   Query: {
-    getTask: async (parent, { id }, { models }) => {
+    getTask: async (parent, { input }, { models }) => {
       let userId = 1;
-      let task = models.Tasks.findOne({ where: { id } });
+      let { id } = input;
+      let { Tasks } = models;
+      try {
+        let task = await Tasks.findOne({ where: { id } });
 
-      if (!task) {
-        throw Error("Task doesn't exists");
+        if (!task) {
+          throw Error("Task doesn't exists");
+        }
+
+        console.log(task.userId);
+        if (task.userId !== task.userId) {
+          throw Error("You don't access to this resource");
+        }
+
+        return task;
+      } catch (error) {
+        throw Error(error);
       }
-
-      if (task.userId !== userId) {
-        throw Error("You don't access to this resource");
-      }
-
-      return task;
     },
-    getTasks: async (parent, args, { models }) =>
-      models.Tasks.findAll({
+    getTasks: async (parent, args, { models }) => {
+      let userId = 1;
+      return await models.Tasks.findAll({
         where: {
           userId
         }
-      })
+      });
+    }
   },
   Mutation: {
-    createTask: async (parent, args, { models }) => {
+    createTask: async (parent, { input }, { models }) => {
       const { Tasks, Projects } = models;
       let { description, projectId } = input;
       let userId = 1;
@@ -40,7 +47,7 @@ export default {
           throw Error("You don't access to this resource");
         }
 
-        task = await Tasks.create({ description, userId, projectId });
+        let task = await Tasks.create({ description, userId, projectId });
 
         return task;
       } catch (error) {
@@ -63,7 +70,7 @@ export default {
 
       await task.update({ input });
 
-      return true;
+      return task;
     }
   }
 };

@@ -9,6 +9,7 @@ export default `
   }
 
   input updateProjectInput {
+    id: Int!
     name: String
   }
 
@@ -19,8 +20,8 @@ export default `
   }
 
   type Query {
-    getProject(input: getProjectInput): Project!
-    getProjects: [Project!]!
+    getProject(input: getProjectInput): Project
+    getProjects: [Project!]
   }
 
   type Mutation {
