@@ -12,7 +12,7 @@ export default {
         }
 
         console.log(task.userId);
-        if (task.userId !== task.userId) {
+        if (task.userId !== userId) {
           throw Error("You don't access to this resource");
         }
 
