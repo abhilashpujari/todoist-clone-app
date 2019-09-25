@@ -1,5 +1,6 @@
 import { ApolloServer, ApolloError } from "apollo-server-express";
 import express from "express";
+import cors from "cors";
 import { fileLoader, mergeTypes, mergeResolvers } from "merge-graphql-schemas";
 import dotenv from "dotenv";
 import path from "path";
@@ -42,6 +43,7 @@ const apolloServer = new ApolloServer({
   }
 });
 
+app.use(cors());
 apolloServer.applyMiddleware({ app });
 
 models.sequelize
