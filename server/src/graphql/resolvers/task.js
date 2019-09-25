@@ -58,19 +58,43 @@ export default {
       const { Tasks, Projects } = models;
       let { id } = input;
 
-      let task = await Tasks.findOne({ where: { id } });
+      try {
+        let task = await Tasks.findOne({ where: { id } });
 
-      if (!task) {
-        throw Error("Task doesn't exists");
+        if (!task) {
+          throw Error("Task doesn't exists");
+        }
+
+        if (task.userId !== userId) {
+          throw Error("You don't access to this resource");
+        }
+
+        await task.update({ input });
+
+        return task;
+      } catch (error) {
+        throw new Error(error);
       }
+    },
+    deleteTask: async (parent, { input }, { models }) => {
+      const { Tasks, Projects } = models;
+      let { id } = input;
 
-      if (task.userId !== userId) {
-        throw Error("You don't access to this resource");
-      }
+      try {
+        let task = await Tasks.findOne({ where: { id } });
 
-      await task.update({ input });
+        if (!task) {
+          throw Error("Task doesn't exists");
+        }
 
-      return task;
+        if (task.userId !== userId) {
+          throw Error("You don't access to this resource");
+        }
+
+        await task.delete();
+
+        return true;
+      } catch (error) {}
     }
   }
 };

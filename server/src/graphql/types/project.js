@@ -8,6 +8,10 @@ export default `
     name: String!
   }
 
+  input deleteProjectInput {
+    id: Int!
+  }
+
   input updateProjectInput {
     id: Int!
     name: String
@@ -25,7 +29,8 @@ export default `
   }
 
   type Mutation {
-    createProject(input: createProjectInput): Project!
-    updateProject(input: updateProjectInput): Project!
+    createProject(input: createProjectInput): Project
+    deleteProject(input: deleteProjectInput): Boolean
+    updateProject(input: updateProjectInput): Project
   }
 `;

@@ -52,6 +52,29 @@ export default {
         throw Error(error);
       }
     },
+    deleteProject: async (parent, args, { models }) => {
+      const { Projects } = models;
+
+      let { name } = input;
+      let userId = 1;
+
+      try {
+        let project = await Projects.findOne({ where: { name, userId } });
+
+        if (!project) {
+          throw Error("Project doesn't exists");
+        }
+
+        if (project.userId !== userId) {
+          throw Error("Your are not authorized to access this resource");
+        }
+
+        await project.delete();
+        return true;
+      } catch (error) {
+        throw Error(error);
+      }
+    },
     updateProject: async (parent, args, { models }) => {
       const { Projects } = models;
 

@@ -10,6 +10,10 @@ export default `
     description: String!
   }
 
+  input deleteTaskInput {
+    id: Int!
+  }
+
   input updateTaskInput {
     id: Int!
     dueDate: String
@@ -28,7 +32,8 @@ export default `
   }
 
   type Mutation {
-    createTask(input: createTaskInput): Task!
-    updateTask(input: updateTaskInput): Task!
+    createTask(input: createTaskInput): Task
+    deleteTask(input: deleteTaskInput): Boolean
+    updateTask(input: updateTaskInput): Task
   }
 `;
