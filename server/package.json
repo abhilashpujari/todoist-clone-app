@@ -16,7 +16,7 @@
   "author": "Abhilash Pujari",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.9.3",
+    "apollo-server-express": "^2.14.2",
     "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
